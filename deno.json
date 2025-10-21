@@ -1,0 +1,42 @@
+{
+  "tasks": {
+    "format": "deno fmt",
+    "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx"
+  },
+  "lint": {
+    "include": [
+      "./*",
+      "./**/*.ts",
+      "./**/*.tsx"
+    ],
+    "rules": {
+      "tags": [
+        "fresh",
+        "recommended"
+      ]
+    }
+  },
+  "fmt": {
+    "include": [
+      "./*",
+      "./**/*.ts",
+      "./**/*.tsx"
+    ],
+    "useTabs": false,
+    "lineWidth": 100,
+    "indentWidth": 2,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "semiColons": true
+  },
+  "exclude": [
+    "**/_fresh/*"
+  ],
+  "compilerOptions": {
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  }
+}
