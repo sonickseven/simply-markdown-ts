@@ -24,12 +24,13 @@ export default function parseHeader(line: string): string {
   const level = match[1].length;
   const rawText = match[2];
   const content = parseInline(rawText);
-  
+
   // Create slug from raw text (before HTML conversion)
   const slug = createSlug(rawText);
 
   // SVG link icon
-  const linkIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px; opacity: 0.6; transition: opacity 0.2s;">
+  const linkIcon =
+    `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 8px; opacity: 0.6; transition: opacity 0.2s;">
     <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
     <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
   </svg>`;
@@ -41,11 +42,6 @@ export default function parseHeader(line: string): string {
     <span>${content}</span>
   </h${level}>`;
 }
-
-
-
-
-
 
 // import parseInline from './parseInLine.ts';
 

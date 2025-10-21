@@ -1,7 +1,12 @@
 {
+  "name": "@sonickseven/simply-markdown",
+  "version": "0.1.0",
+  "license": "MIT",
+  "exports": "./mod.ts",
   "tasks": {
     "format": "deno fmt",
-    "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx"
+    "check": "deno fmt --check && deno lint && deno check **/*.ts",
+    "test": "deno run test.ts"
   },
   "lint": {
     "include": [
@@ -29,9 +34,6 @@
     "proseWrap": "preserve",
     "semiColons": true
   },
-  "exclude": [
-    "**/_fresh/*"
-  ],
   "compilerOptions": {
     "noUnusedLocals": true,
     "noUnusedParameters": true,
