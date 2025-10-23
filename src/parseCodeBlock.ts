@@ -31,7 +31,8 @@ export default function parseCodeBlock(
   const html = `<div class="code-block-container" style="position: relative;">
   <button 
     class="copy-code-btn"
-    data-code-id="${codeId}"   
+    data-code-id="${codeId}"
+    onclick="copyCodeToClipboard('${codeId}')"
     title="Copy to clipboard"
   >
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

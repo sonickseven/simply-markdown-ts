@@ -1,4 +1,3 @@
-
 function si(tag, cb) {
 	;[].forEach.call(document.querySelectorAll(tag), elem => {
 		if (cb) cb(elem)
@@ -12,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-function copyCodeToClipboard() {
-  const codeId = this.dataset?.codeId || 'dg'
+function copyCodeToClipboard(codeIdByButton) {
+  const codeId = codeIdByButton || this.dataset?.codeId || 'dg'
   const codeElement = document.getElementById(codeId);
   const text = codeElement.textContent || codeElement.innerText;
   
