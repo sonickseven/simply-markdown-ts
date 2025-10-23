@@ -20,6 +20,11 @@ jobs:
         run: deno task check
 
   publish:
+
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+
     name: publishin to JSR
     runs-on: ubuntu-latest
     container: denoland/deno:alpine-2.4.2
