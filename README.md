@@ -107,7 +107,7 @@ This library works seamlessly with [Prism](https://prismjs.com/), a popular synt
     <div id="markdown-content"></div>
 
     <script type="module">
-      import { CSS, render } from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
+      import { CSS, render, clipBoard } from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
 
       const text_md = `# Hello, mundo!
 
@@ -149,6 +149,10 @@ println!(greet("World"));
 
         const contentElement = document.getElementById('markdown-content');
         contentElement.innerHTML = render(text_md);
+       
+        const script = document.createElement('script');
+        script.textContent = clipBoard;
+        document.body.appendChild(script);
 
         if (window.Prism) {
           Prism.highlightAllUnder(contentElement);
@@ -272,7 +276,7 @@ Esta librería funciona perfectamente con [Prism](https://prismjs.com/), un popu
     <div id="markdown-content"></div>
 
     <script type="module">
-      import { CSS, render } from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
+      import { CSS, render, clipBoard } from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
 
       const text_md = `# ¡Hola, mundo!
 
@@ -314,6 +318,10 @@ println!(greet("World"));
 
         const contentElement = document.getElementById('markdown-content');
         contentElement.innerHTML = render(text_md);
+        
+        const script = document.createElement('script');
+        script.textContent = clipBoard;
+        document.body.appendChild(script);
 
         if (window.Prism) {
           Prism.highlightAllUnder(contentElement);
@@ -437,7 +445,7 @@ Esta biblioteca funciona perfeitamente com [Prism](https://prismjs.com/), um pop
     <div id="markdown-content"></div>
 
     <script type="module">
-      import { CSS, render } from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
+      import { CSS, render, clipBoard } from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
 
       const text_md = `# Olá, mundo!
 
@@ -479,6 +487,10 @@ println!(greet("World"));
 
         const contentElement = document.getElementById('markdown-content');
         contentElement.innerHTML = render(text_md);
+
+        const script = document.createElement('script');
+        script.textContent = clipBoard;
+        document.body.appendChild(script);
 
         if (window.Prism) {
           Prism.highlightAllUnder(contentElement);
