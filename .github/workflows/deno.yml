@@ -2,7 +2,7 @@ name: Deno Build and Publishing
 
 on:
   push:
-    branches: [ main ]
+    branches: '*'
 
 jobs:
   builddeno:
