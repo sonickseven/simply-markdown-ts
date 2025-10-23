@@ -1,8 +1,9 @@
-# simply-markdown-ts
+# Index
 
-Is an alternative to render markdown format
+1.  [_________________English documentation](./#english)
+2.  [_________________Documentación en español](./#español)
+3.  [_________________Documentação em espanhol](./#Português)
 
----
 
 # English
 
@@ -70,6 +71,97 @@ import { CSS } from "jsr:@sonickseven/simply-markdown";
 const style = document.createElement("style");
 style.textContent = CSS;
 document.head.appendChild(style);
+```
+
+### Use with Prism
+
+This library works seamlessly with [Prism](https://prismjs.com/), a popular syntax highlighter, allowing you to format code blocks in multiple languages (TypeScript, JavaScript, Rust, Python, etc.). 
+
+**📚 [Review all supported Prism languages here](https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript)**
+
+#### Example Integration
+
+```html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown with Syntax Highlighting</title>
+    
+    <!-- Prism CSS Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+
+     <!-- Load Prism.js with more language support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
+</head>
+<body>
+    <div id="markdown-content"></div>
+
+    <script type="module">
+        import {render, CSS} from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
+
+        const text_md = `# Hello, mundo!
+
+This is a paragraph with **bold** and *italic* text.
+
+## Code Example
+
+\`\`\`typescript
+function greet(name: string): string {
+    return \`Hello, \${name}!\`;
+}
+
+console.log(greet("World"));
+\`\`\`
+
+---
+
+\`\`\`rust
+fn greet(name: string) -> string {
+    format!("Hello {}", name)
+}
+
+println!(greet("World"));
+\`\`\`
+
+---
+
+- List item 1
+- List item 2
+
+[Visit my website](https://sonickseven.deno.dev)`;
+
+        document.addEventListener('DOMContentLoaded', async() => {
+
+            await new Promise(resol=>setTimeout(resol, 1000));
+
+            const style = document.createElement('style');
+            style.textContent = CSS;
+            document.head.appendChild(style);
+
+            
+            const contentElement = document.getElementById('markdown-content');
+            contentElement.innerHTML = render(text_md);
+            
+            const script = document.createElement('script');
+            script.textContent = jsClip;
+            document.head.appendChild(script);
+            // Re-run Prism to highlight any code blocks
+
+            
+            if (window.Prism) {
+                // console.log(window.Prism, 'FT y está la preguta')
+                Prism.highlightAllUnder(contentElement);
+            }
+        });
+    </script>
+</body>
+</html>
+
 ```
 
 ## Contributing
@@ -150,6 +242,95 @@ style.textContent = CSS;
 document.head.appendChild(style);
 ```
 
+### Uso con Prism
+
+Esta librería funciona perfectamente con [Prism](https://prismjs.com/), un popular resaltador de sintaxis, permitiéndote formatear bloques de código en múltiples lenguajes (TypeScript, JavaScript, Rust, Python, etc.).
+
+**📚 [Revisa todos los lenguajes soportados por Prism aquí](https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript)**
+
+#### Ejemplo de Integración
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown con Resaltado de Sintaxis</title>
+    
+    <!-- Tema CSS de Prism -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+
+     <!-- Cargar Prism.js con más soporte de lenguajes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
+</head>
+<body>
+    <div id="markdown-content"></div>
+
+    <script type="module">
+        import {render, CSS} from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
+
+        const text_md = `# ¡Hola, mundo!
+
+Este es un párrafo con texto **negrita** y *cursiva*.
+
+## Ejemplo de Código
+
+\`\`\`typescript
+function greet(name: string): string {
+    return \`Hello, \${name}!\`;
+}
+
+console.log(greet("World"));
+\`\`\`
+
+---
+
+\`\`\`rust
+fn greet(name: string) -> string {
+    format!("Hello {}", name)
+}
+
+println!(greet("World"));
+\`\`\`
+
+---
+
+- Elemento de lista 1
+- Elemento de lista 2
+
+[Visita mi sitio web](https://sonickseven.deno.dev)`;
+
+        document.addEventListener('DOMContentLoaded', async() => {
+
+            await new Promise(resol=>setTimeout(resol, 1000));
+
+            const style = document.createElement('style');
+            style.textContent = CSS;
+            document.head.appendChild(style);
+
+            
+            const contentElement = document.getElementById('markdown-content');
+            contentElement.innerHTML = render(text_md);
+            
+            const script = document.createElement('script');
+            script.textContent = jsClip;
+            document.head.appendChild(script);
+            // Volver a ejecutar Prism para resaltar cualquier bloque de código
+
+            
+            if (window.Prism) {
+                // console.log(window.Prism, 'FT y está la preguta')
+                Prism.highlightAllUnder(contentElement);
+            }
+        });
+    </script>
+</body>
+</html>
+```
+
 ## Contribuciones
 
 Las contribuciones son bienvenidas. Si encuentras un error o quieres sugerir una nueva característica, por favor abre un issue en GitHub.
@@ -226,6 +407,95 @@ import { CSS } from "jsr:@sonickseven/simply-markdown";
 const style = document.createElement("style");
 style.textContent = CSS;
 document.head.appendChild(style);
+```
+
+### Uso com Prism
+
+Esta biblioteca funciona perfeitamente com [Prism](https://prismjs.com/), um popular destacador de sintaxe, permitindo que você formate blocos de código em múltiplas linguagens (TypeScript, JavaScript, Rust, Python, etc.).
+
+**📚 [Revise todas as linguagens suportadas pelo Prism aqui](https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript)**
+
+#### Exemplo de Integração
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown com Realce de Sintaxe</title>
+    
+    <!-- Tema CSS do Prism -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+
+     <!-- Carregar Prism.js com mais suporte a linguagens -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
+</head>
+<body>
+    <div id="markdown-content"></div>
+
+    <script type="module">
+        import {render, CSS} from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
+
+        const text_md = `# Olá, mundo!
+
+Este é um parágrafo com texto **negrito** e *itálico*.
+
+## Exemplo de Código
+
+\`\`\`typescript
+function greet(name: string): string {
+    return \`Hello, \${name}!\`;
+}
+
+console.log(greet("World"));
+\`\`\`
+
+---
+
+\`\`\`rust
+fn greet(name: string) -> string {
+    format!("Hello {}", name)
+}
+
+println!(greet("World"));
+\`\`\`
+
+---
+
+- Item da lista 1
+- Item da lista 2
+
+[Visite meu website](https://sonickseven.deno.dev)`;
+
+        document.addEventListener('DOMContentLoaded', async() => {
+
+            await new Promise(resol=>setTimeout(resol, 1000));
+
+            const style = document.createElement('style');
+            style.textContent = CSS;
+            document.head.appendChild(style);
+
+            
+            const contentElement = document.getElementById('markdown-content');
+            contentElement.innerHTML = render(text_md);
+            
+            const script = document.createElement('script');
+            script.textContent = jsClip;
+            document.head.appendChild(script);
+            // Executar novamente o Prism para destacar quaisquer blocos de código
+
+            
+            if (window.Prism) {
+                // console.log(window.Prism, 'FT y está la preguta')
+                Prism.highlightAllUnder(contentElement);
+            }
+        });
+    </script>
+</body>
+</html>
 ```
 
 ## Contribuições
