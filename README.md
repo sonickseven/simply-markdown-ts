@@ -1,9 +1,8 @@
 # Index
 
-1.  [_________________English documentation](./#english)
-2.  [_________________Documentación en español](./#español)
-3.  [_________________Documentação em espanhol](./#Português)
-
+1. [_________________English documentation](./#english)
+2. [_________________Documentación en español](./#español)
+3. [_________________Documentação em espanhol](./#Português)
 
 # English
 
@@ -16,7 +15,7 @@
 To use `simply-markdown-ts` in your project, you can import it directly from JSR:
 
 ```typescript
-import { render } from "jsr:@sonickseven/simply-markdown";
+import { render } from 'jsr:@sonickseven/simply-markdown';
 ```
 
 ## Usage
@@ -24,7 +23,7 @@ import { render } from "jsr:@sonickseven/simply-markdown";
 The `render` function is the entry point of the library. It takes a markdown string and returns the corresponding HTML.
 
 ```typescript
-import { render } from "jsr:@sonickseven/simply-markdown";
+import { render } from 'jsr:@sonickseven/simply-markdown';
 
 const markdown = `# Hello, world!
 
@@ -66,45 +65,51 @@ Returns the rendered HTML as a string.
 A string with the default CSS to style the rendered HTML. You can include it in your project to get a default style.
 
 ```typescript
-import { CSS } from "jsr:@sonickseven/simply-markdown";
+import { CSS } from 'jsr:@sonickseven/simply-markdown';
 
-const style = document.createElement("style");
+const style = document.createElement('style');
 style.textContent = CSS;
 document.head.appendChild(style);
 ```
 
 ### Use with Prism
 
-This library works seamlessly with [Prism](https://prismjs.com/), a popular syntax highlighter, allowing you to format code blocks in multiple languages (TypeScript, JavaScript, Rust, Python, etc.). 
+This library works seamlessly with [Prism](https://prismjs.com/), a popular syntax highlighter, allowing you to format code blocks in multiple languages (TypeScript, JavaScript, Rust, Python, etc.).
 
 **📚 [Review all supported Prism languages here](https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript)**
 
 #### Example Integration
 
 ```html
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown with Syntax Highlighting</title>
-    
-    <!-- Prism CSS Theme -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
 
-     <!-- Load Prism.js with more language support -->
+    <!-- Prism CSS Theme -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+
+    <!-- Load Prism.js with more language support -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
-</head>
-<body>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"
+    ></script>
+  </head>
+  <body>
     <div id="markdown-content"></div>
 
     <script type="module">
-        import {render, CSS} from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
+      import { CSS, render } from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
 
-        const text_md = `# Hello, mundo!
+      const text_md = `# Hello, mundo!
 
 This is a paragraph with **bold** and *italic* text.
 
@@ -135,26 +140,23 @@ println!(greet("World"));
 
 [Visit my website](https://sonickseven.deno.dev)`;
 
-        document.addEventListener('DOMContentLoaded', async() => {
+      document.addEventListener('DOMContentLoaded', async () => {
+        await new Promise((resol) => setTimeout(resol, 1000));
 
-            await new Promise(resol=>setTimeout(resol, 1000));
+        const style = document.createElement('style');
+        style.textContent = CSS;
+        document.head.appendChild(style);
 
-            const style = document.createElement('style');
-            style.textContent = CSS;
-            document.head.appendChild(style);
+        const contentElement = document.getElementById('markdown-content');
+        contentElement.innerHTML = render(text_md);
 
-            
-            const contentElement = document.getElementById('markdown-content');
-            contentElement.innerHTML = render(text_md);
-                        
-            if (window.Prism) {
-                Prism.highlightAllUnder(contentElement);
-            }
-        });
+        if (window.Prism) {
+          Prism.highlightAllUnder(contentElement);
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
-
 ```
 
 ## Contributing
@@ -178,7 +180,7 @@ Contributions are welcome. If you find a bug or want to suggest a new feature, p
 Para usar `simply-markdown-ts` en tu proyecto, puedes importarlo directamente desde JSR:
 
 ```typescript
-import { render } from "jsr:@sonickseven/simply-markdown";
+import { render } from 'jsr:@sonickseven/simply-markdown';
 ```
 
 ## Uso
@@ -186,7 +188,7 @@ import { render } from "jsr:@sonickseven/simply-markdown";
 La función `render` es el punto de entrada de la biblioteca. Toma una cadena de markdown y devuelve el HTML correspondiente.
 
 ```typescript
-import { render } from "jsr:@sonickseven/simply-markdown";
+import { render } from 'jsr:@sonickseven/simply-markdown';
 
 const markdown = `# ¡Hola, mundo!
 
@@ -228,9 +230,9 @@ Devuelve el HTML renderizado como una cadena.
 Una cadena con el CSS por defecto para estilizar el HTML renderizado. Puedes incluirlo en tu proyecto para obtener un estilo por defecto.
 
 ```typescript
-import { CSS } from "jsr:@sonickseven/simply-markdown";
+import { CSS } from 'jsr:@sonickseven/simply-markdown';
 
-const style = document.createElement("style");
+const style = document.createElement('style');
 style.textContent = CSS;
 document.head.appendChild(style);
 ```
@@ -246,26 +248,33 @@ Esta librería funciona perfectamente con [Prism](https://prismjs.com/), un popu
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown con Resaltado de Sintaxis</title>
-    
-    <!-- Tema CSS de Prism -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
 
-     <!-- Cargar Prism.js con más soporte de lenguajes -->
+    <!-- Tema CSS de Prism -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+
+    <!-- Cargar Prism.js con más soporte de lenguajes -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
-</head>
-<body>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"
+    ></script>
+  </head>
+  <body>
     <div id="markdown-content"></div>
 
     <script type="module">
-        import {render, CSS} from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
+      import { CSS, render } from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
 
-        const text_md = `# ¡Hola, mundo!
+      const text_md = `# ¡Hola, mundo!
 
 Este es un párrafo con texto **negrita** y *cursiva*.
 
@@ -296,24 +305,22 @@ println!(greet("World"));
 
 [Visita mi sitio web](https://sonickseven.deno.dev)`;
 
-        document.addEventListener('DOMContentLoaded', async() => {
+      document.addEventListener('DOMContentLoaded', async () => {
+        await new Promise((resol) => setTimeout(resol, 1000));
 
-            await new Promise(resol=>setTimeout(resol, 1000));
+        const style = document.createElement('style');
+        style.textContent = CSS;
+        document.head.appendChild(style);
 
-            const style = document.createElement('style');
-            style.textContent = CSS;
-            document.head.appendChild(style);
+        const contentElement = document.getElementById('markdown-content');
+        contentElement.innerHTML = render(text_md);
 
-            
-            const contentElement = document.getElementById('markdown-content');
-            contentElement.innerHTML = render(text_md);
-                        
-            if (window.Prism) {
-                Prism.highlightAllUnder(contentElement);
-            }
-        });
+        if (window.Prism) {
+          Prism.highlightAllUnder(contentElement);
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
 ```
 
@@ -338,7 +345,7 @@ Las contribuciones son bienvenidas. Si encuentras un error o quieres sugerir una
 Para usar `simply-markdown-ts` em seu projeto, você pode importá-lo diretamente do JSR:
 
 ```typescript
-import { render } from "jsr:@sonickseven/simply-markdown";
+import { render } from 'jsr:@sonickseven/simply-markdown';
 ```
 
 ## Uso
@@ -346,7 +353,7 @@ import { render } from "jsr:@sonickseven/simply-markdown";
 A função `render` é o ponto de entrada da biblioteca. Ela recebe uma string de markdown e retorna o HTML correspondente.
 
 ```typescript
-import { render } from "jsr:@sonickseven/simply-markdown";
+import { render } from 'jsr:@sonickseven/simply-markdown';
 
 const markdown = `# Olá, mundo!
 
@@ -388,9 +395,9 @@ Retorna o HTML renderizado como uma string.
 Uma string com o CSS padrão para estilizar o HTML renderizado. Você pode incluí-lo em seu projeto para obter um estilo padrão.
 
 ```typescript
-import { CSS } from "jsr:@sonickseven/simply-markdown";
+import { CSS } from 'jsr:@sonickseven/simply-markdown';
 
-const style = document.createElement("style");
+const style = document.createElement('style');
 style.textContent = CSS;
 document.head.appendChild(style);
 ```
@@ -406,26 +413,33 @@ Esta biblioteca funciona perfeitamente com [Prism](https://prismjs.com/), um pop
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Markdown com Realce de Sintaxe</title>
-    
-    <!-- Tema CSS do Prism -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
 
-     <!-- Carregar Prism.js com mais suporte a linguagens -->
+    <!-- Tema CSS do Prism -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+
+    <!-- Carregar Prism.js com mais suporte a linguagens -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
-</head>
-<body>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"
+    ></script>
+  </head>
+  <body>
     <div id="markdown-content"></div>
 
     <script type="module">
-        import {render, CSS} from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
+      import { CSS, render } from 'https://esm.sh/jsr/@sonickseven/simply-markdown';
 
-        const text_md = `# Olá, mundo!
+      const text_md = `# Olá, mundo!
 
 Este é um parágrafo com texto **negrito** e *itálico*.
 
@@ -456,24 +470,22 @@ println!(greet("World"));
 
 [Visite meu website](https://sonickseven.deno.dev)`;
 
-        document.addEventListener('DOMContentLoaded', async() => {
+      document.addEventListener('DOMContentLoaded', async () => {
+        await new Promise((resol) => setTimeout(resol, 1000));
 
-            await new Promise(resol=>setTimeout(resol, 1000));
+        const style = document.createElement('style');
+        style.textContent = CSS;
+        document.head.appendChild(style);
 
-            const style = document.createElement('style');
-            style.textContent = CSS;
-            document.head.appendChild(style);
+        const contentElement = document.getElementById('markdown-content');
+        contentElement.innerHTML = render(text_md);
 
-            
-            const contentElement = document.getElementById('markdown-content');
-            contentElement.innerHTML = render(text_md);
-                        
-            if (window.Prism) {
-                Prism.highlightAllUnder(contentElement);
-            }
-        });
+        if (window.Prism) {
+          Prism.highlightAllUnder(contentElement);
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
 ```
 
