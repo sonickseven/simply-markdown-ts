@@ -146,15 +146,8 @@ println!(greet("World"));
             
             const contentElement = document.getElementById('markdown-content');
             contentElement.innerHTML = render(text_md);
-            
-            const script = document.createElement('script');
-            script.textContent = jsClip;
-            document.head.appendChild(script);
-            // Re-run Prism to highlight any code blocks
-
-            
+                        
             if (window.Prism) {
-                // console.log(window.Prism, 'FT y está la preguta')
                 Prism.highlightAllUnder(contentElement);
             }
         });
@@ -314,15 +307,8 @@ println!(greet("World"));
             
             const contentElement = document.getElementById('markdown-content');
             contentElement.innerHTML = render(text_md);
-            
-            const script = document.createElement('script');
-            script.textContent = jsClip;
-            document.head.appendChild(script);
-            // Volver a ejecutar Prism para resaltar cualquier bloque de código
-
-            
+                        
             if (window.Prism) {
-                // console.log(window.Prism, 'FT y está la preguta')
                 Prism.highlightAllUnder(contentElement);
             }
         });
@@ -481,15 +467,8 @@ println!(greet("World"));
             
             const contentElement = document.getElementById('markdown-content');
             contentElement.innerHTML = render(text_md);
-            
-            const script = document.createElement('script');
-            script.textContent = jsClip;
-            document.head.appendChild(script);
-            // Executar novamente o Prism para destacar quaisquer blocos de código
-
-            
+                        
             if (window.Prism) {
-                // console.log(window.Prism, 'FT y está la preguta')
                 Prism.highlightAllUnder(contentElement);
             }
         });
