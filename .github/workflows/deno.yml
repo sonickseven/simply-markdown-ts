@@ -1,6 +1,4 @@
-# heelo
-#
-name: Deno Build and Deploy
+name: Deno Build and Publishing
 
 on:
   push:
@@ -20,3 +18,16 @@ jobs:
          
       - name: Check
         run: deno task check
+
+  publish:
+    name: publishin to JSR
+    runs-on: ubuntu-latest
+    container: denoland/deno:alpine-2.4.2
+
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - uses: actions/checkout@v4
+         
+      - name: releasing
+        run: deno publish
