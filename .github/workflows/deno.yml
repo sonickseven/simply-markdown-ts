@@ -1,0 +1,22 @@
+# heelo
+#
+name: Deno Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  builddeno:
+    name: Build Deno Application
+    runs-on: ubuntu-latest
+    container: denoland/deno:alpine-2.4.2
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Deno version
+        run: deno --version
+         
+      - name: Check
+        run: deno task check
