@@ -1,11 +1,10 @@
 .markdown-body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.5;
   word-wrap: break-word;
   color: #24292f;
   background-color: #ffffff;
-  padding: 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
   /* Headers */
@@ -15,21 +14,21 @@
   h4,
   h5,
   h6 {
-    margin-top: 24px;
-    margin-bottom: 16px;
+    margin-top: 20px;
+    margin-bottom: 1rem;
     font-weight: 600;
-    line-height: 1.25;
+    line-height: 2;
     color: #24292f;
   }
 
   h1 {
-    font-size: 2em;
+    font-size: 1.7em;
     border-bottom: 1px solid #d0d7de;
     padding-bottom: 0.3em;
   }
 
   h2 {
-    font-size: 1.5em;
+    font-size: 1.4em;
     border-bottom: 1px solid #d0d7de;
     padding-bottom: 0.3em;
   }
@@ -54,14 +53,14 @@
   /* Paragraphs */
   p {
     margin-top: 0;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 
   /* Lists with custom icons */
   ul,
   ol {
     margin-top: 0;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
     padding-left: 0;
     list-style: none;
   }
@@ -73,9 +72,8 @@
     margin-bottom: 0.25em;
   }
 
-  /* Main list items with single dot */
   ul li::before, ol li::before {
-    content: "•";
+    content: '•';
     display: inline-block;
     margin-left: -15px;
     margin-top: -8px;
@@ -85,7 +83,7 @@
   }
 
   li > p {
-    margin-top: 16px;
+    margin-top: 1rem;
   }
 
   li + li {
@@ -132,13 +130,13 @@
   }
 
   pre {
-    padding: 16px;
+    padding: 1rem;
     overflow: auto;
     font-size: 85%;
     line-height: 1.45;
     background-color: #f6f8fa;
     border-radius: 6px;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 
   pre code {
@@ -159,14 +157,14 @@
     padding: 0 1em;
     color: #57606a;
     border-left: 0.25em solid #d0d7de;
-    margin: 0 0 16px 0;
+    margin: 0 0 1rem 0;
   }
 
   /* Tables (if you add table support later) */
   table {
     border-spacing: 0;
     border-collapse: collapse;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
     width: 100%;
   }
 
@@ -192,9 +190,9 @@
 
   /* Horizontal rule */
   hr {
-    height: 0.25em;
+    height: 2px;
     padding: 0;
-    margin: 24px 0;
+    margin: 20px 0;
     background-color: #d0d7de;
     border: 0;
   }
@@ -227,7 +225,6 @@
     background: #2d3748; 
   }
 }
-
 /* Dark mode support */
 
 @media (prefers-color-scheme: dark) {
