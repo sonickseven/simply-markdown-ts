@@ -36,8 +36,8 @@ This is a paragraph with **bold** and *italic* text.
 `;
 
 const html = render(markdown, {
-  disableUrlIndex: true
-}); 
+  disableUrlIndex: true,
+});
 console.log(html);
 ```
 
@@ -211,8 +211,8 @@ Este es un párrafo con texto en **negrita** y *cursiva*.
 `;
 
 const html = render(markdown, {
-  disableUrlIndex: true
-}); 
+  disableUrlIndex: true,
+});
 console.log(html);
 ```
 
@@ -386,8 +386,8 @@ Este é um parágrafo com texto em **negrito** e *itálico*.
 `;
 
 const html = render(markdown, {
-  disableUrlIndex: true
-}); 
+  disableUrlIndex: true,
+});
 console.log(html);
 ```
 

@@ -1,4 +1,4 @@
 export type renderTypes = {
   baseUrl: string;
-  disableUrlIndex?: true
+  disableUrlIndex?: true;
 };

@@ -27,7 +27,7 @@ export default function parseHeader(line: string, disableUrlIndex?: true): strin
 
   const slug = createSlug(rawText);
 
-  if (disableUrlIndex){
+  if (disableUrlIndex) {
     return `<h${level} id="${slug}">${content}</h${level}>`;
   }
 

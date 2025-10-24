@@ -19,7 +19,6 @@ export { default as clipBoard } from './src/clipBoardJs.ts';
 export function render(markdown: string, options?: renderTypes): string {
   if (!markdown) return '';
 
-
   const lines = markdown.split('\n');
   const html: string[] = [];
   let i = 0;
