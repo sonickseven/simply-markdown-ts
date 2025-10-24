@@ -35,7 +35,9 @@ This is a paragraph with **bold** and *italic* text.
 [Visit my website](https://sonickseven.deno.dev)
 `;
 
-const html = render(markdown);
+const html = render(markdown, {
+  disableUrlIndex: true,
+});
 console.log(html);
 ```
 
@@ -208,7 +210,9 @@ Este es un párrafo con texto en **negrita** y *cursiva*.
 [Visita mi sitio web](https://example.com)
 `;
 
-const html = render(markdown);
+const html = render(markdown, {
+  disableUrlIndex: true,
+});
 console.log(html);
 ```
 
@@ -381,7 +385,9 @@ Este é um parágrafo com texto em **negrito** e *itálico*.
 [Visite meu site](https://example.com)
 `;
 
-const html = render(markdown);
+const html = render(markdown, {
+  disableUrlIndex: true,
+});
 console.log(html);
 ```
 

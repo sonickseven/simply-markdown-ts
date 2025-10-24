@@ -19,9 +19,6 @@ export { default as clipBoard } from './src/clipBoardJs.ts';
 export function render(markdown: string, options?: renderTypes): string {
   if (!markdown) return '';
 
-  // to future
-  options;
-
   const lines = markdown.split('\n');
   const html: string[] = [];
   let i = 0;
@@ -44,7 +41,7 @@ export function render(markdown: string, options?: renderTypes): string {
 
     // Headers (# ## ### etc)
     if (line.match(/^#{1,6}\s+/)) {
-      html.push(parseHeader(line));
+      html.push(parseHeader(line, options?.disableUrlIndex));
       i++;
       continue;
     }
