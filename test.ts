@@ -8,7 +8,7 @@ function test() {
 I'm a nomarl text with a **bold text**
  `;
 
-  const result = render(test);
+  const result = render(test, { isBackend: false });
   console.log(result, 'FT what is this');
 }
 

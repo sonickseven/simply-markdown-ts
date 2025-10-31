@@ -33,7 +33,7 @@ export function render(markdown: string, options?: renderTypes): string {
 
     // Code blocks (``` or ~~~)
     if (line.trim().startsWith('```') || line.trim().startsWith('~~~')) {
-      const result = parseCodeBlock(lines, i);
+      const result = parseCodeBlock(lines, i, options?.isBackend);
       html.push(result.html);
       i = result.nextIndex;
       continue;

@@ -1,11 +1,9 @@
 import escapeHtml from './escapeHTML.ts';
 
-/**
- * Parse code blocks
- */
 export default function parseCodeBlock(
   lines: string[],
   startIndex: number,
+  isBackend?: boolean,
 ): { html: string; nextIndex: number } {
   const firstLine = lines[startIndex].trim();
   const delimiter = firstLine.startsWith('```') ? '```' : '~~~';
@@ -26,13 +24,13 @@ export default function parseCodeBlock(
   const langClass = language ? ` class="language-${escapeHtml(language)}"` : '';
 
   // Create unique ID for this code block
-  const codeId = `code-${Math.random().toString(36).substr(2, 9)}`;
+  const codeId = `code-${Math.random().toString(36).substring(2, 9)}`;
 
   const html = `<div class="code-block-container" style="position: relative;">
   <button 
-    class="copy-code-btn"
-    data-code-id="${codeId}"
-    onclick="copyCodeToClipboard('${codeId}')"
+  class="copy-code-btn"
+  data-code-id="${codeId}"
+   ${isBackend ? '' : `onclick="copyCodeToClipboard('${codeId}')"`}
     title="Copy to clipboard"
   >
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
