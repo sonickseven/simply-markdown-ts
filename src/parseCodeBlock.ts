@@ -3,7 +3,7 @@ import escapeHtml from './escapeHTML.ts';
 export default function parseCodeBlock(
   lines: string[],
   startIndex: number,
-  isBackend: boolean,
+  isBackend?: boolean,
 ): { html: string; nextIndex: number } {
   const firstLine = lines[startIndex].trim();
   const delimiter = firstLine.startsWith('```') ? '```' : '~~~';
