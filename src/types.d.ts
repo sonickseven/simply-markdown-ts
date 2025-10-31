@@ -1,5 +1,5 @@
 export type renderTypes = {
   baseUrl?: string;
   disableUrlIndex?: true;
-  isBackend: boolean
+  isBackend: boolean;
 };
