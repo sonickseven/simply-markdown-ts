@@ -16,7 +16,7 @@ import clipBoard from './src/clipBoardJs.ts';
 export { default as CSS } from './src/css.ts';
 export { default as clipBoard } from './src/clipBoardJs.ts';
 
-export function render(markdown: string, options?: renderTypes): string {
+export function render(markdown: string, options: renderTypes): string {
   if (!markdown) return '';
 
   const lines = markdown.split('\n');
@@ -33,7 +33,7 @@ export function render(markdown: string, options?: renderTypes): string {
 
     // Code blocks (``` or ~~~)
     if (line.trim().startsWith('```') || line.trim().startsWith('~~~')) {
-      const result = parseCodeBlock(lines, i);
+      const result = parseCodeBlock(lines, i, options?.isBackend);
       html.push(result.html);
       i = result.nextIndex;
       continue;

@@ -12,9 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function copyCodeToClipboard(codeIdByButton) {
-  const codeId = codeIdByButton || this.dataset?.codeId || 'dg'
+  const codeId = this.dataset?.codeId|| codeIdByButton ||  'dg'
+  console.log(codeId, 'FT what is this')
+
   const codeElement = document.getElementById(codeId);
-  const text = codeElement.textContent || codeElement.innerText;
+  const text = codeElement?.textContent || codeElement?.innerText;
   
   // Modern clipboard API
   if (navigator.clipboard && navigator.clipboard.writeText) {
