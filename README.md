@@ -169,6 +169,13 @@ println!(greet("World"));
 </html>
 ```
 
+## Run demo localy
+
+```bash
+deno task demo 3009
+# open browser to http://localhost:3009
+```
+
 ## Contributing
 
 Contributions are welcome. If you find a bug or want to suggest a new feature, please open an issue on GitHub.

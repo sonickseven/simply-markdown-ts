@@ -6,6 +6,7 @@ import parseBlockquote from './src/parseBlockquote.ts';
 import parseHeader from './src/parseHeader.ts';
 import type { renderTypes } from './src/types.d.ts';
 import clipBoard from './src/clipBoardJs.ts';
+import CSS, { lightCSS, darkCSS, noneCSS } from './src/css.ts';
 
 /**
  * Converts Markdown text to HTML string
@@ -13,8 +14,21 @@ import clipBoard from './src/clipBoardJs.ts';
  * @returns HTML string representation of the markdown
  */
 
-export { default as CSS } from './src/css.ts';
+export { default as CSS, lightCSS, darkCSS, noneCSS } from './src/css.ts';
 export { default as clipBoard } from './src/clipBoardJs.ts';
+
+function themeStylesheet(theme: NonNullable<renderTypes['theme']>): string {
+  switch (theme) {
+    case 'system':
+      return `<style>${CSS}</style>`;
+    case 'light':
+      return `<style>${lightCSS}</style>`;
+    case 'dark':
+      return `<style>${darkCSS}</style>`;
+    case 'none':
+      return `<style>${noneCSS}</style>`;
+  }
+}
 
 export function render(markdown: string, options?: renderTypes): string {
   if (!markdown) return '';
@@ -92,5 +106,8 @@ export function render(markdown: string, options?: renderTypes): string {
     i++;
   }
 
-  return `<div class="markdown-body"><script>${clipBoard}</script>` + html.join('\n') + `</div>`;
+  const stylesheet = options?.theme ? themeStylesheet(options.theme) : '';
+
+  return `<div class="markdown-body">${stylesheet}<script>${clipBoard}</script>` +
+    html.join('\n') + `</div>`;
 }

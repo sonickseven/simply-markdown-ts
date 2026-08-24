@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simply-markdown-ts demo</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f8fa;
+        --fg: #24292f;
+        --panel: #ffffff;
+        --border: #d0d7de;
+        --accent: #0969da;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --fg: #c9d1d9;
+          --panel: #161b22;
+          --border: #30363d;
+          --accent: #58a6ff;
+        }
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+      }
+      header {
+        padding: 12px 20px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        background: var(--panel);
+      }
+      header h1 {
+        font-size: 1rem;
+        margin: 0;
+        font-weight: 600;
+      }
+      header label {
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      header select {
+        font: inherit;
+        padding: 4px 8px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--panel);
+        color: var(--fg);
+      }
+      main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: var(--border);
+        height: calc(100% - 53px);
+      }
+      @media (max-width: 800px) {
+        main { grid-template-columns: 1fr; height: auto; }
+      }
+      .pane {
+        background: var(--panel);
+        display: flex;
+        flex-direction: column;
+        min-height: 320px;
+      }
+      .pane h2 {
+        margin: 0;
+        padding: 8px 16px;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--accent);
+        border-bottom: 1px solid var(--border);
+      }
+      .pane textarea {
+        flex: 1;
+        width: 100%;
+        border: 0;
+        resize: none;
+        padding: 16px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.9rem;
+        background: var(--panel);
+        color: var(--fg);
+        outline: none;
+      }
+      .pane .output {
+        flex: 1;
+        padding: 16px;
+        overflow: auto;
+      }
+      a { color: var(--accent); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>simply-markdown-ts demo</h1>
+      <label>
+        Theme:
+        <select id="theme">
+          <option value="system">system</option>
+          <option value="light">light</option>
+          <option value="dark">dark</option>
+          <option value="none">none</option>
+        </select>
+      </label>
+    </header>
+    <main>
+      <section class="pane">
+        <h2>Markdown input</h2>
+        <textarea id="input" spellcheck="false"></textarea>
+      </section>
+      <section class="pane">
+        <h2>Rendered output</h2>
+        <div id="output" class="output"></div>
+      </section>
+    </main>
+
+    <script type="module">
+      import { render } from './bundle.js';
+
+      const sample = `# Hello, markdown!
+
+Try editing this text on the left — the preview updates live.
+
+## Features
+
+- **Bold**, *italic*, ~~strikethrough~~
+- [Links](https://deno.land) and images
+- Inline \`code\` and code blocks
+- > Blockquotes
+- Tables
+
+### Code
+
+\`\`\`ts
+import { render } from "jsr:@sonickseven/simply-markdown";
+const html = render("# hi", { isBackend: false, theme: "dark" });
+\`\`\`
+
+### Table
+
+| Feature | Supported |
+| ------- | --------- |
+| Themes  | yes       |
+| Tables  | yes       |
+`;
+
+      const input = document.getElementById('input');
+      const output = document.getElementById('output');
+      const themeSel = document.getElementById('theme');
+
+      input.value = sample;
+      themeSel.value = 'none';
+
+      function update() {
+        output.innerHTML = render(input.value, {
+          isBackend: false,
+          theme: themeSel.value,
+        });
+      }
+
+      input.addEventListener('input', update);
+      themeSel.addEventListener('change', update);
+      update();
+    </script>
+  </body>
+</html>

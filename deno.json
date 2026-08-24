@@ -1,12 +1,14 @@
 {
   "name": "@sonickseven/simply-markdown",
-  "version": "0.5.5",
+  "version": "1.0.0",
   "license": "MIT",
   "exports": "./mod.ts",
   "tasks": {
     "format": "deno fmt",
     "check": "deno fmt --check && deno lint && deno check **/*.ts",
-    "test": "deno run test.ts"
+    "test": "deno run test.ts",
+    "bundle": "deno run -A npm:esbuild mod.ts --bundle --outfile=bundle.js --format=esm",
+    "demo": "deno task bundle && deno run --allow-net --allow-read demo.ts"
   },
   "lint": {
     "include": [
