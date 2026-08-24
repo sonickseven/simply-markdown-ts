@@ -22,12 +22,16 @@
           --accent: #58a6ff;
         }
       }
-      * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
       html, body {
         margin: 0;
         padding: 0;
         height: 100%;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial,
+          sans-serif;
         background: var(--bg);
         color: var(--fg);
       }
@@ -67,7 +71,10 @@
         height: calc(100% - 53px);
       }
       @media (max-width: 800px) {
-        main { grid-template-columns: 1fr; height: auto; }
+        main {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
       }
       .pane {
         background: var(--panel);
@@ -101,7 +108,9 @@
         padding: 16px;
         overflow: auto;
       }
-      a { color: var(--accent); }
+      a {
+        color: var(--accent);
+      }
     </style>
   </head>
   <body>
