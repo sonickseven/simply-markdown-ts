@@ -23,8 +23,7 @@ const DARK_VARS = `
   --md-row-border: #21262d;
   --md-nested-bullet: #8b949e;`;
 
-const BASE_CSS: string =
-  `.markdown-body {
+const BASE_CSS: string = `.markdown-body {
 
     --md-fg:  currentColor;
 
