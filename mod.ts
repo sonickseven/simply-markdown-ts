@@ -86,7 +86,7 @@ export function render(markdown: string, options?: renderTypes): string {
     }
 
     // Unordered lists (-, *, +)
-    if (line.match(/^[\s]*[-*+]\s+/)) {
+    if (line.match(/^[\s]*[-*+]\s+/) && line.replace(/(\s)/g, '').length > 2) {
       const result = parseList(lines, i, false);
       html.push(result.html);
       i = result.nextIndex;
@@ -94,9 +94,7 @@ export function render(markdown: string, options?: renderTypes): string {
     }
 
     // Ordered lists (1., 2., etc)
-    if (line.match(/^[\s]*\d+\.\s+/)) {
-      // Check if this is a continuation of a previous list
-      // by looking at the indent level
+    if (line.match(/^[\s]*\d+\.\s+/) && line.replace(/(\s)/g, '').length > 2) {
       const result = parseList(lines, i, true);
       html.push(result.html);
       i = result.nextIndex;
