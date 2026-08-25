@@ -79,7 +79,6 @@
     position: relative;
     padding-left: 2em;
     margin-bottom: 0.25em;
-    line-height: 0.6;
 }
 
 .markdown-body ul li::before, .markdown-body ol li::before {
@@ -99,7 +98,6 @@
 
 .markdown-body ol li{
   counter-increment: md-ol;
-  line-height: 1.2;
   padding-left: 2.3em;    
 }
 .markdown-body li > p {
