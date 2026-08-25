@@ -1,8 +1,5 @@
 import parseInline from './parseInLine.ts';
 
-/**
- * Parse lists (ordered and unordered)
- */
 export default function parseList(
   lines: string[],
   startIndex: number,
@@ -10,24 +7,25 @@ export default function parseList(
 ): { html: string; nextIndex: number } {
   const listItems: string[] = [];
   let i = startIndex;
-  const listPattern = ordered ? /^(\s*)\d+\.\s+(.+)$/ : /^(\s*)([-*+])\s+(.+)$/;
+  // Fixed: Changed regex for ordered lists to handle numbers correctly
+  const listPattern = ordered
+    ? /^(\s*)(\d+)\.\s+(.+)$/ // Added group for number
+    : /^(\s*)([-*+])\s+(.+)$/;
 
   while (i < lines.length) {
     const match = lines[i].match(listPattern);
     if (!match) break;
 
     const indent = match[1].length;
-    const content = ordered ? match[2] : match[3];
+    const content = ordered ? match[3] : match[3]; // Adjusted group access
 
-    // Check if content starts with another list marker (e.g., "- - Item" or "- * Item")
+    // Check if content starts with another list marker
     const nestedMarkerMatch = content.match(/^([-*+])\s+(.+)$/);
     if (nestedMarkerMatch) {
-      // Content has a list marker, treat it as nested
       const nestedContent = nestedMarkerMatch[2];
+      const prefix = content.substring(0, content.indexOf(nestedMarkerMatch[1]));
       listItems.push(
-        `<li>${parseInline(content.substring(0, content.indexOf(nestedMarkerMatch[1])))}<ul>\n<li>${
-          parseInline(nestedContent)
-        }</li>\n</ul></li>`,
+        `<li>${parseInline(prefix)}<ul>\n<li>${parseInline(nestedContent)}</li>\n</ul></li>`,
       );
       i++;
       continue;
@@ -37,7 +35,6 @@ export default function parseList(
     if (i + 1 < lines.length) {
       const nextMatch = lines[i + 1].match(listPattern);
       if (nextMatch && nextMatch[1].length > indent) {
-        // Has nested list with proper indentation
         const nested = parseList(lines, i + 1, ordered);
         listItems.push(`<li>${parseInline(content)}${nested.html}</li>`);
         i = nested.nextIndex;
