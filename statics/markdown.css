@@ -1,27 +1,27 @@
 .markdown-body {
-    
+
   --md-fg:  currentColor;
-    
+
   --md-bg:  transparent;
-    
+
   --md-border:  currentColor;
-    
+
   --md-muted:  currentColor;
-    
+
   --md-link:  currentColor;
-    
+
   --md-code-bg:  transparent;
-    
+
   --md-pre-bg:  transparent;
-    
+
   --md-row-alt-bg:  transparent;
-    
+
   --md-row-border:  currentColor;
-    
+
   --md-btn-bg:  rgba(0,  0,  0,  0.5);
-    
+
   --md-btn-bg-hover:  rgba(0,  0,  0,  0.7);
-    
+
   font-family: -apple-system,  BlinkMacSystemFont,  "Segoe UI",  "Noto Sans",  Helvetica,  Arial,  sans-serif;
     font-size: 1rem;
     line-height: 1.5;
@@ -74,31 +74,33 @@
 .markdown-body ol{
    counter-reset: md-ol;
 }
+.markdown-body > ul > li, .markdown-body > ol > li {
+    padding-left: 2.3em;
+}
 .markdown-body li {
     word-wrap: break-word;
     position: relative;
-    padding-left: 2em;
     margin-bottom: 0.25em;
 }
 
 .markdown-body ul li::before, .markdown-body ol li::before {
   display: inline-block;
+  position: absolute;
+  margin-left: -1.4rem;
 }
 
 .markdown-body ul li::before {
   content: "•";
-  padding-right: 0.25em;
   font-size: 2rem;
+  margin-top: -.9rem;
 }
-.markdown-body ol li::before {
-  padding-right: 0.8em;
+.markdown-body ol > li::before {
   content: counter(md-ol) ".";
   font-size: 1rem;
 }
 
-.markdown-body ol li{
+.markdown-body ol > li{
   counter-increment: md-ol;
-  padding-left: 2.3em;    
 }
 .markdown-body li > p {
     margin-top: 1rem;

@@ -95,6 +95,8 @@ export function render(markdown: string, options?: renderTypes): string {
 
     // Ordered lists (1., 2., etc)
     if (line.match(/^[\s]*\d+\.\s+/)) {
+      // Check if this is a continuation of a previous list
+      // by looking at the indent level
       const result = parseList(lines, i, true);
       html.push(result.html);
       i = result.nextIndex;

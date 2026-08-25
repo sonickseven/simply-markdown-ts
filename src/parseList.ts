@@ -1,5 +1,8 @@
 import parseInline from './parseInLine.ts';
 
+const ORDERED_PATTERN = /^(\s*)(\d+)\.\s+(.+)$/;
+const UNORDERED_PATTERN = /^(\s*)([-*+])\s+(.+)$/;
+
 export default function parseList(
   lines: string[],
   startIndex: number,
@@ -7,19 +10,16 @@ export default function parseList(
 ): { html: string; nextIndex: number } {
   const listItems: string[] = [];
   let i = startIndex;
-  // Fixed: Changed regex for ordered lists to handle numbers correctly
-  const listPattern = ordered
-    ? /^(\s*)(\d+)\.\s+(.+)$/ // Added group for number
-    : /^(\s*)([-*+])\s+(.+)$/;
+  const listPattern = ordered ? ORDERED_PATTERN : UNORDERED_PATTERN;
 
   while (i < lines.length) {
     const match = lines[i].match(listPattern);
     if (!match) break;
 
     const indent = match[1].length;
-    const content = ordered ? match[3] : match[3]; // Adjusted group access
+    const content = match[3];
 
-    // Check if content starts with another list marker
+    // Check if content starts with another list marker (inline nested marker, e.g. "- - Item")
     const nestedMarkerMatch = content.match(/^([-*+])\s+(.+)$/);
     if (nestedMarkerMatch) {
       const nestedContent = nestedMarkerMatch[2];
@@ -31,11 +31,16 @@ export default function parseList(
       continue;
     }
 
-    // Check for nested lists with indentation
+    // Check for nested lists with indentation — try BOTH patterns,
+    // since a nested list can be a different type (e.g. ordered > unordered)
     if (i + 1 < lines.length) {
-      const nextMatch = lines[i + 1].match(listPattern);
+      const nextOrderedMatch = lines[i + 1].match(ORDERED_PATTERN);
+      const nextUnorderedMatch = lines[i + 1].match(UNORDERED_PATTERN);
+      const nextMatch = nextOrderedMatch || nextUnorderedMatch;
+      const nextIsOrdered = !!nextOrderedMatch;
+
       if (nextMatch && nextMatch[1].length > indent) {
-        const nested = parseList(lines, i + 1, ordered);
+        const nested = parseList(lines, i + 1, nextIsOrdered);
         listItems.push(`<li>${parseInline(content)}${nested.html}</li>`);
         i = nested.nextIndex;
         continue;
