@@ -95,6 +95,70 @@
   margin-left: -1.4rem;
 }
 
+/* Container adjustments for task list items */
+.markdown-body li:has(.md-checkbox) {
+  list-style: none;
+  padding-left: 1em;
+  position: relative;
+}
+
+.markdown-body li:has(.md-checkbox)::before {
+  content: none;
+}
+
+/* Hide the native input but keep accessibility */
+.markdown-body .md-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 2px;
+  margin: 0 0.55em 0 0;
+  vertical-align: -0.2em;
+  border: 2px solid var(--md-fg);
+  border-radius: 6px;
+  background-color: var(--md-muted);
+}
+
+
+/* Focus ring for accessibility */
+.markdown-body .md-checkbox:focus-visible {
+  outline: 2px solid var(--md-link);
+  outline-offset: 2px;
+}
+
+/* Checked state */
+.markdown-body .md-checkbox:checked {
+  background-color: var(--md-link);
+  border-color: var(--md-link);
+}
+
+/* The checkmark (SVG-like via clip-path) */
+.markdown-body .md-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.55em;
+  height: 0.3em;
+  border-left: 2.5px solid #ffffff;
+  border-bottom: 2.5px solid #ffffff;
+  transform: translate(-50%, -65%) rotate(-45deg);
+  transform-origin: center;
+}
+
+/* Strikethrough effect on checked item text */
+.markdown-body li:has(.md-checkbox:checked) {
+  color: var(--color-text-muted, #64748b);
+}
+
+.markdown-body li:has(.md-checkbox:checked) > *:not(.md-checkbox) {
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--color-text-muted, #64748b) 60%, transparent);
+  text-decoration-thickness: 1.5px;
+}
+
 .markdown-body ul li::before {
   content: "•";
   font-size: 2rem;

@@ -3,6 +3,9 @@ import parseInline from './parseInLine.ts';
 const ORDERED_PATTERN = /^(\s*)(\d+)\.\s+(.+)$/;
 const UNORDERED_PATTERN = /^(\s*)([-*+])\s+(.+)$/;
 
+// Matches "- [x] text" or "- [] text" (also accepts "* " and "+ ")
+const CHECKBOX_PATTERN = /^\[([ xX]?)\]\s+(.*)$/;
+
 export default function parseList(
   lines: string[],
   startIndex: number,
@@ -26,7 +29,6 @@ export default function parseList(
     if (baseIndent === -1) {
       baseIndent = indent;
     } else if (indent < baseIndent) {
-      // Break out if indentation drops below this list's depth level
       break;
     }
 
@@ -44,9 +46,26 @@ export default function parseList(
       continue;
     }
 
+    // ---- Checkbox detection ----
+    let checkboxHtml = '';
+    let displayContent = content;
+
+    const checkboxMatch = content.match(CHECKBOX_PATTERN);
+    if (checkboxMatch) {
+      const isChecked = checkboxMatch[1].toLowerCase() === 'x';
+      const isUnchecked = checkboxMatch[1] === '';
+      // Only render a checkbox when we have `[x]` or `[]`
+      if (isChecked || isUnchecked) {
+        checkboxHtml = `<input type="checkbox" disabled${
+          isChecked ? ' checked' : ''
+        } class="md-checkbox"> `;
+        displayContent = checkboxMatch[2];
+      }
+    }
+
     // Check for nested child lists on subsequent lines
     let nestedHtml = '';
-    i++; // Move to next line candidate
+    i++;
 
     if (i < lines.length) {
       const nextOrderedMatch = lines[i].match(ORDERED_PATTERN);
@@ -61,7 +80,9 @@ export default function parseList(
       }
     }
 
-    listItems.push(`<li>${parseInline(content)}${nestedHtml}</li>`);
+    listItems.push(
+      `<li>${checkboxHtml}${parseInline(displayContent)}${nestedHtml}</li>`,
+    );
   }
 
   const tag = ordered ? 'ol' : 'ul';

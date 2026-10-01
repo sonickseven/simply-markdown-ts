@@ -10,25 +10,31 @@ export default function parseInline(text: string): string {
   result = result.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
 
   // Inline code
-  result = result.replace(/\b`([^`]+)`\b/g, (_, code) => `<code>${escapeHtml(code)}</code>`);
+  result = result.replace(/`([^`]+)`/g, (_, code) => `<code>${escapeHtml(code)}</code>`);
 
-  // Bold and italic
-  result = result.replace(/\b\*\*\*(.+?)\*\*\*\b/g, '<strong><em>$1</em></strong>');
-  result = result.replace(/\b___(.+?)___\b/g, '<strong><em>$1</em></strong>');
+  // Bold + italic
+  result = result.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  result = result.replace(/___(.+?)___/g, '<strong><em>$1</em></strong>');
 
-  // Bold
-  result = result.replace(/\b\*\*(.+?)\*\*\b/g, '<strong>$1</strong>');
-  result = result.replace(/\b__(.+?)__\b/g, '<strong>$1</strong>');
+  // Bold **text** or __text__
+  result = result.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // ⚠️ For __bold__, require boundaries so AREA_ha doesn't trigger it
+  result = result.replace(
+    /(^|[\s.,;:!?(])__([^_\n]+?)__(?=[\s.,;:!?)]|$)/g,
+    '$1<strong>$2</strong>',
+  );
 
-  // Italic
-  result = result.replace(/\b\*(.+?)\*\b/g, '<em>$1</em>');
-  result = result.replace(/\b_(.+?)_\b/g, '<em>$1</em>');
+  // Italic *text*
+  result = result.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+  // Italic _text_ — ⚠️ REQUIRES boundaries so AREA_ha is safe
+  result = result.replace(/(^|[\s.,;:!?(])_([^_\n]+?)_(?=[\s.,;:!?)]|$)/g, '$1<em>$2</em>');
 
   // Strikethrough
-  result = result.replace(/\b~(.+?)~\b/g, '<del>$1</del>');
+  result = result.replace(/~~(.+?)~~/g, '<del>$1</del>');
 
   // Line breaks
-  result = result.replace(/\s\s$/g, '<br>');
+  result = result.replace(/ {2}$/g, '<br>');
 
   return result;
 }
